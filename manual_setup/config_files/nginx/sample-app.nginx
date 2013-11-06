@@ -1,0 +1,21 @@
+upstream unicorn-appname {
+  server unix:/tmp/sample-app.sock;
+}
+
+server {
+  listen 80;
+  server_name sample-app.com;
+  root /home/deploy/foobar/public
+
+  location / {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Real-IP  $remote_addr;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+
+    if (!-f $request_filename) {
+      proxy_pass http://unicorn-sample-app;
+      break;
+    }
+  }
+}
