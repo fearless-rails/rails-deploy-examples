@@ -1,11 +1,11 @@
-upstream unicorn-appname {
+upstream unicorn-sample-app {
   server unix:/tmp/sample-app.sock;
 }
 
 server {
   listen 80;
   server_name sample-app.com;
-  root /home/deploy/foobar/public
+  root /home/deploy/sample-app/public;
 
   location / {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
