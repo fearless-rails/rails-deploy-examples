@@ -2,7 +2,8 @@
 production:
   adapter: postgresql
   encoding: unicode
-  database: sample-rails-app_production
+  database: sample_app_production
   pool: 5
   username: postgres
   password: password
+  host: localhost
