@@ -6,9 +6,11 @@ BUNDLE_COMMAND=/usr/local/rvm/bin/deploy_bundle
 GEMFILE=/home/deploy/sample-app/Gemfile
 CUR_PID_FILE=/home/deploy/sample-app/tmp/unicorn.pid
 UNICORN_CONFIG=/etc/unicorn/sample-app.rb
+UNICORN_USER=deploy
 
-# don't tweak this one
+# don't tweak these two
 OLD_PID_FILE=$CUR_PID_FILE.oldbin
+UNICORN_GROUP=$UNICORN_USER
 
 # log STDERR to STDOUT
 exec 2>&1
@@ -50,7 +52,7 @@ fi
 if [ ! $RUNNING ]; then
     echo "Starting unicorn"
     cd $WORKING_DIR
-    exec /usr/bin/chpst -u deploy:deploy $BUNDLE_COMMAND exec unicorn -E production -c $UNICORN_CONFIG
+    exec /usr/bin/chpst -u $UNICORN_USER:$UNICORN_GROUP $BUNDLE_COMMAND exec unicorn -E production -c $UNICORN_CONFIG
     sleep 3
     CUR_PID=$(cat $CUR_PID_FILE)
 fi
