@@ -2,7 +2,7 @@
 
 # configuration variables
 WORKING_DIR=/home/deploy/sample-app
-BUNDLE_COMMAND=/usr/local/rvm/bin/deploy_bundle
+BUNDLE_COMMAND=/home/deploy/.rvm/bin/deploy_bundle
 GEMFILE=/home/deploy/sample-app/Gemfile
 CUR_PID_FILE=/home/deploy/sample-app/tmp/unicorn.pid
 UNICORN_CONFIG=/etc/unicorn/sample-app.rb
