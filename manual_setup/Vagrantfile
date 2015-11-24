@@ -1,10 +1,16 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "precise64"
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  # base box will be 64bit Ubuntu 14.04
+  config.vm.box = "ubuntu/trusty64"
+
+  # create a private network for this machine and give it a static IP address
   config.vm.network :private_network, ip: "192.168.3.10"
+
+  # set the hostname of this machine to something we can browse to
   config.vm.hostname = "sample-app.com"
+
+  # tweak the virtual machine's "hardware"
   config.vm.provider :virtualbox do |v|
     v.customize ["modifyvm", :id, "--memory", 1024, "--cpus", "2"]
   end
